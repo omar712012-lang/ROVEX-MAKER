@@ -1,0 +1,9 @@
+<%- include('../partials/head', { title }) %>
+<%- include('../partials/sidebar') %>
+<main class="main-area"><%- include('../partials/topbar', { title }) %><div class="page-content"><%- include('../partials/alerts') %>
+  <div class="page-back"><a href="/bots/<%= bot.id %>">← <%= bot.name %></a></div>
+  <section class="welcome-row"><div><div class="eyebrow"><%= t("bot_control_center") %></div><h1><%= t("bot_logs") %></h1><p><%= total %> recorded events · newest first · 50 per page.</p></div><a class="button button-ghost" href="/bots/<%= bot.id %>">Back to overview</a></section>
+  <section class="panel section-panel"><% if (!logs.length) { %><div class="empty-inline">No log events recorded yet.</div><% } else { %><div class="log-list log-list-full"><% logs.forEach(entry => { %><div class="log-row"><span class="log-level level-<%= entry.level %>"><%= entry.level %></span><div><b><%= entry.category %></b><p><%= entry.message %></p><small><%= new Date(entry.created_at + 'Z').toLocaleString() %></small></div></div><% }) %></div><% } %>
+    <div class="pagination"><% if (page > 1) { %><a class="button button-ghost button-small" href="?page=<%= page - 1 %>">← Newer</a><% } else { %><span></span><% } %><span>Page <%= page %> of <%= pages %></span><% if (page < pages) { %><a class="button button-ghost button-small" href="?page=<%= page + 1 %>">Older →</a><% } %></div>
+  </section>
+</div></main><%- include('../partials/footer') %>

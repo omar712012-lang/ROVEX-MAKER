@@ -1,0 +1,32 @@
+<aside class="sidebar">
+  <a class="brand" href="/dashboard"><span class="brand-mark">R</span><span>ROVEX <b>MAKER</b></span></a>
+  <div class="sidebar-caption"><%= t('workspace') %></div>
+  <nav class="side-nav">
+    <div class="sidebar-caption">OVERVIEW</div>
+    <a class="nav-link <%= currentPath === '/dashboard' ? 'active' : '' %>" href="/dashboard"><span class="nav-icon">▦</span> Dashboard</a>
+    <a class="nav-link <%= currentPath === '/analytics' ? 'active' : '' %>" href="/analytics"><span class="nav-icon">▥</span> Analytics</a>
+    <a class="nav-link <%= currentPath === '/activity' ? 'active' : '' %>" href="/activity"><span class="nav-icon">◷</span> Activity</a>
+    <div class="sidebar-caption">WORKSPACE</div>
+    <a class="nav-link <%= currentPath.startsWith('/bots') ? 'active' : '' %>" href="/bots"><span class="nav-icon">⌘</span> My Bots</a>
+    <a class="nav-link" href="/builder"><span class="nav-icon">＋</span> Create Bot</a>
+    <a class="nav-link <%= currentPath.startsWith('/templates') ? 'active' : '' %>" href="/templates"><span class="nav-icon">▧</span> Templates</a>
+    <a class="nav-link <%= currentPath === '/favorites' ? 'active' : '' %>" href="/favorites"><span class="nav-icon">☆</span> Favorites</a>
+    <div class="sidebar-caption">SAAS</div>
+    <a class="nav-link <%= currentPath.startsWith('/subscription') ? 'active' : '' %>" href="/subscription"><span class="nav-icon">◇</span> Subscription</a>
+    <a class="nav-link <%= currentPath === '/billing' ? 'active' : '' %>" href="/billing"><span class="nav-icon">▤</span> Billing</a>
+    <a class="nav-link <%= currentPath === '/usage' ? 'active' : '' %>" href="/usage"><span class="nav-icon">◫</span> Usage & Limits</a>
+    <a class="nav-link <%= currentPath === '/team' ? 'active' : '' %>" href="/team"><span class="nav-icon">♧</span> Team</a>
+    <div class="sidebar-caption">SETTINGS</div>
+    <a class="nav-link <%= currentPath === '/profile' ? 'active' : '' %>" href="/profile"><span class="nav-icon">◉</span> Profile</a>
+    <a class="nav-link <%= currentPath === '/security' ? 'active' : '' %>" href="/security"><span class="nav-icon">⛨</span> Security</a>
+    <a class="nav-link <%= currentPath === '/notifications' ? 'active' : '' %>" href="/notifications"><span class="nav-icon">♢</span> Notifications</a>
+    <% if (isAdmin) { %><div class="sidebar-caption admin-caption">ADMINISTRATION</div><a class="nav-link <%= currentPath.startsWith('/admin') ? 'active' : '' %>" href="/admin"><span class="nav-icon">⚙</span> Admin Panel</a><a class="nav-link" href="/admin/templates"><span class="nav-icon">▧</span> Template Management</a><% } %>
+    <div class="sidebar-caption">RESOURCES</div>
+    <a class="nav-link" href="/docs"><span class="nav-icon">?</span> Documentation</a>
+    <a class="nav-link" href="/pricing"><span class="nav-icon">◇</span> Plans</a>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="host-note"><span class="status-dot"></span><div><b><%= t('control_active') %></b><small><%= t('process_local') %></small></div></div>
+    <a class="sidebar-doc" href="/profile"><%= t('account_settings') %> <span>↗</span></a>
+  </div>
+</aside>

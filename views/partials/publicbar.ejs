@@ -1,0 +1,15 @@
+<header class="public-page-nav">
+  <a class="brand" href="/"><span class="brand-mark">R</span><span>ROVEX <b>MAKER</b></span></a>
+  <nav aria-label="Main navigation"><a href="/features">Features</a><a href="/templates">Templates</a><a href="/docs">Docs</a><a href="/pricing">Plans</a></nav>
+  <div class="public-nav-actions">
+    <form class="language-switch public-language-switch" method="post" action="/language">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label class="sr-only" for="public-language">Language</label>
+      <select id="public-language" name="language" aria-label="Language" onchange="this.form.submit()">
+        <option value="en" <%= lang === 'en' ? 'selected' : '' %>>EN</option>
+        <option value="ar" <%= lang === 'ar' ? 'selected' : '' %>>AR</option>
+      </select>
+    </form>
+    <a class="button button-primary button-small" href="/login">Sign in</a>
+  </div>
+</header>

@@ -1,0 +1,9 @@
+<%- include('../partials/head', { title }) %>
+<%- include('../partials/sidebar') %>
+<main class="main-area"><%- include('../partials/topbar', { title }) %><div class="page-content"><%- include('../partials/alerts') %>
+  <section class="welcome-row"><div><div class="eyebrow"><%= t("bot_inventory") %></div><h1><%= t("my_bots_title") %></h1><p><%= t("all_bots") %></p></div><a class="button button-primary" href="/bots/new">＋ <%= t("create_bot") %></a></section>
+  <div class="inventory-toolbar"><div class="toolbar-count"><b><%= bots.length %></b> of <%= maxBots %> <%= t("slots_used") %></div><div class="toolbar-meter"><span style="width:<%= Math.min(100, bots.length / maxBots * 100) %>%"></span></div></div>
+  <% if (!bots.length) { %><div class="empty-state"><div class="empty-icon">⌘</div><h3><%= t("no_bots") %></h3><p>Create a bot using a token generated for your own Discord application.</p><a href="/bots/new" class="button button-primary"><%= t("create_bot") %></a></div><% } else { %>
+    <div class="bot-grid inventory-grid"><% bots.forEach(bot => { %><a class="bot-card" href="/bots/<%= bot.id %>"><div class="bot-card-top"><div class="bot-avatar"><% if (bot.avatar_url) { %><img src="<%= bot.avatar_url %>" alt=""><% } else { %>◈<% } %></div><span class="status-badge status-<%= bot.status %>"><i></i><%= bot.status %></span></div><h3><%= bot.name %></h3><p><%= bot.description || 'No description provided.' %></p><div class="bot-card-foot"><span><%= bot.client_id %></span><span>Manage →</span></div></a><% }) %></div>
+  <% } %>
+</div></main><%- include('../partials/footer') %>

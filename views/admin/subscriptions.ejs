@@ -1,0 +1,9 @@
+<%- include('../partials/head', { title }) %>
+<%- include('../partials/sidebar') %>
+<main class="main-area"><%- include('../partials/topbar', { title }) %><div class="page-content"><%- include('../partials/alerts') %>
+  <section class="page-intro"><div class="eyebrow">ADMINISTRATION / SAAS</div><h1>Subscription Management</h1><p>Manual plan changes are administrator overrides only. They are not proof of payment.</p></section>
+  <div class="notice notice-warning"><span>There is no payment processor or checkout configured. Do not use manual plan assignment as a payment confirmation.</span></div>
+  <section class="panel section-panel"><div class="table-wrap"><table><thead><tr><th>User</th><th>Plan</th><th>Status</th><th>Provider</th><th>Started</th><th>Admin Override</th></tr></thead><tbody>
+  <% subscriptions.forEach(subscription=>{ %><tr><td><b><%= subscription.username %></b><small><%= subscription.discord_id %></small></td><td><%= subscription.plan_key %></td><td><%= subscription.status %></td><td><%= subscription.provider %></td><td><%= subscription.started_at %></td><td><form class="inline-form" method="post" action="/admin/subscriptions/<%= subscription.id %>/plan"><input type="hidden" name="_csrf" value="<%= csrfToken %>"><select class="input" name="plan_key" aria-label="New plan for <%= subscription.username %>"><% plans.forEach(plan=>{ %><option value="<%= plan.key %>" <%= plan.key===subscription.plan_key?'selected':'' %>><%= plan.name %></option><% }) %></select><button class="button button-primary button-small" type="submit">Apply</button></form></td></tr><% }) %>
+  </tbody></table></div><% if(!subscriptions.length){ %><div class="empty-state"><h3>No subscriptions yet</h3><p>Subscription records appear when users sign in.</p></div><% } %></section>
+</div></main><%- include('../partials/footer') %>

@@ -1,0 +1,7 @@
+<%- include('partials/head', { title }) %>
+<%- include('partials/sidebar') %>
+<main class="main-area"><%- include('partials/topbar', { title }) %><div class="page-content narrow-content"><%- include('partials/alerts') %>
+  <section class="page-intro"><div class="eyebrow">ACCOUNT</div><h1><%= t("account_profile") %></h1><p>Your workspace identity comes from Discord OAuth2.</p></section>
+  <section class="panel profile-panel"><div class="profile-main"><% if (currentUser.avatar) { %><img src="<%= currentUser.avatar %>" class="avatar avatar-xl" alt="Discord avatar"><% } else { %><span class="avatar avatar-xl avatar-fallback">◉</span><% } %><div><h2><%= currentUser.global_name || currentUser.username %></h2><p>@<%= currentUser.username %></p><span class="status-badge status-online"><i></i> Authenticated</span></div></div><div class="profile-details"><div><small>DISCORD USER ID</small><code><%= currentUser.discord_id %></code></div><div><small>PLATFORM ACCOUNT</small><b>#<%= currentUser.id %></b></div></div><form method="post" action="/auth/logout"><input type="hidden" name="_csrf" value="<%= csrfToken %>"><button class="button button-ghost"><%= t("sign_out") %></button></form></section>
+  <div class="secure-callout"><span>♢</span><div><b><%= t("account_security") %></b><p>ROVEX MAKER uses Discord OAuth2 for identity only. It does not request your Discord password and does not store your OAuth access token.</p></div></div>
+</div></main><%- include('partials/footer') %>

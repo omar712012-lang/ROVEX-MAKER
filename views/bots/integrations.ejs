@@ -1,0 +1,75 @@
+<%- include('../partials/head', { title }) %>
+<%- include('../partials/sidebar') %>
+<main class="main-area">
+  <%- include('../partials/topbar', { title }) %>
+  <div class="page-content narrow-content">
+    <%- include('../partials/alerts') %>
+    <div class="page-back"><a href="/bots/<%= bot.id %>">← <%= bot.name %></a></div>
+    <section class="page-intro integration-intro">
+      <div>
+        <div class="eyebrow">BOT WORKSPACE / INTEGRATIONS</div>
+        <h1><%= title %></h1>
+        <p>Connect external services to this bot. Credentials are encrypted at rest and never returned to the browser.</p>
+      </div>
+      <span class="count-pill"><%= updated.length %> configured provider(s)</span>
+    </section>
+
+    <div class="integration-grid">
+      <section class="panel section-panel integration-card">
+        <div class="integration-card-head">
+          <div class="integration-symbol openai-symbol">AI</div>
+          <div>
+            <div class="eyebrow">AI ASSISTANT</div>
+            <h2>OpenAI</h2>
+            <p>Enables the <code>/ask</code> command for this bot.</p>
+          </div>
+          <span class="integration-status <%= openaiConfigured ? 'is-configured' : '' %>"><%= openaiConfigured ? 'Configured' : 'Not configured' %></span>
+        </div>
+        <form method="post" action="/bots/<%= bot.id %>/integrations/openai" class="integration-form">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <label class="field-label" for="openai-key">OpenAI API Key</label>
+          <input class="input" id="openai-key" name="api_key" type="password" minlength="20" maxlength="500" required autocomplete="new-password" placeholder="sk-…">
+          <small class="field-help">The saved key is never shown. Enter a new key to replace it.</small>
+          <label class="field-label" for="openai-model">Model</label>
+          <select class="input" id="openai-model" name="model">
+            <option value="gpt-4o-mini">gpt-4o-mini · recommended</option>
+            <option value="gpt-4o">gpt-4o</option>
+            <option value="gpt-4.1-mini">gpt-4.1-mini</option>
+          </select>
+          <div class="form-actions"><button class="button button-primary" type="submit">Save OpenAI integration</button></div>
+        </form>
+      </section>
+
+      <section class="panel section-panel integration-card">
+        <div class="integration-card-head">
+          <div class="integration-symbol translate-symbol">文</div>
+          <div>
+            <div class="eyebrow">TRANSLATION</div>
+            <h2>LibreTranslate</h2>
+            <p>Enables the <code>/translate</code> command for this bot.</p>
+          </div>
+          <span class="integration-status <%= translatorConfigured ? 'is-configured' : '' %>"><%= translatorConfigured ? 'Configured' : 'Not configured' %></span>
+        </div>
+        <form method="post" action="/bots/<%= bot.id %>/integrations/libretranslate" class="integration-form">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <label class="field-label" for="translate-endpoint">Endpoint</label>
+          <input class="input" id="translate-endpoint" value="<%= translatorEndpoint %>" readonly>
+          <small class="field-help">The platform administrator controls this endpoint through <code>TRANSLATE_API_URL</code>.</small>
+          <label class="field-label" for="translate-key">LibreTranslate API Key (optional)</label>
+          <input class="input" id="translate-key" name="api_key" type="password" maxlength="500" autocomplete="new-password" placeholder="Leave empty if the endpoint does not require a key">
+          <small class="field-help"><%= translatorHasKey ? 'A key is already stored. Submitting an empty field removes the saved key.' : 'Some LibreTranslate instances work without an API key.' %></small>
+          <div class="form-actions"><button class="button button-primary" type="submit">Save translation integration</button></div>
+        </form>
+      </section>
+    </div>
+
+    <section class="panel integration-security-note">
+      <div class="security-note-icon">◇</div>
+      <div>
+        <b>Credential handling</b>
+        <p>API keys are encrypted with AES-256-GCM using the server-side <code>ENCRYPTION_KEY</code>. Keys are not included in page data, exports, logs or API responses. External provider usage may incur charges on your provider account.</p>
+      </div>
+    </section>
+  </div>
+</main>
+<%- include('../partials/footer') %>

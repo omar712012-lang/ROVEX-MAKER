@@ -1,0 +1,19 @@
+<header class="topbar">
+  <button class="mobile-menu" type="button" aria-label="Toggle navigation" data-menu-toggle>☰</button>
+  <div class="breadcrumbs"><span><%= t('workspace') %></span><i>/</i><b><%= title %></b></div>
+  <div class="topbar-right">
+    <form class="topbar-search" method="get" action="/search"><span>⌕</span><input name="q" aria-label="Search templates" placeholder="Search bots & templates..."></form><button class="topbar-icon-link command-trigger" type="button" data-command-open aria-label="Open command palette">⌘K</button><a class="topbar-icon-link" href="/notifications" aria-label="Notifications">♢</a><span class="topbar-plan"><%= t('bot_control_center') %></span>
+    <form class="language-switch" method="post" action="/language">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <select name="language" aria-label="Language" onchange="this.form.submit()">
+        <option value="en" <%= lang === 'en' ? 'selected' : '' %>>EN</option>
+        <option value="ar" <%= lang === 'ar' ? 'selected' : '' %>>AR</option>
+      </select>
+    </form>
+    <a class="user-chip" href="/profile">
+      <% if (currentUser && currentUser.avatar) { %><img src="<%= currentUser.avatar %>" alt="" class="avatar avatar-sm"><% } else { %><span class="avatar avatar-sm avatar-fallback">◉</span><% } %>
+      <span><%= currentUser ? (currentUser.global_name || currentUser.username) : t('account') %></span>
+    </a>
+  </div>
+</header>
+<dialog class="command-palette" data-command-dialog><div class="command-palette-head"><b>Quick navigation</b><button type="button" data-command-close>×</button></div><a href="/dashboard">Dashboard</a><a href="/bots">My Bots</a><a href="/bots/new">Create Bot</a><a href="/templates">Template Marketplace</a><a href="/analytics">Analytics</a><a href="/subscription">Subscription</a><a href="/team">Team Management</a><a href="/docs">Documentation</a></dialog>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="<%= lang %>" dir="<%= dir %>">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07152f"><title><%= title %></title><link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="public-body">
+<nav class="public-nav"><form class="language-switch" method="post" action="/language"><input type="hidden" name="_csrf" value="<%= csrfToken %>"><select name="language" aria-label="Language" onchange="this.form.submit()"><option value="en" <%= lang === 'en' ? 'selected' : '' %>>EN</option><option value="ar" <%= lang === 'ar' ? 'selected' : '' %>>AR</option></select></form><a class="brand" href="/"><span class="brand-mark">R</span><span>ROVEX <b>MAKER</b></span></a><a class="button button-ghost" href="/login"><%= t("sign_in") %> <span>↗</span></a></nav>
+<main class="hero-wrap">
+  <div class="hero-copy">
+    <div class="eyebrow"><span class="pulse-dot"></span> <%= t("bot_control_center") %></div>
+    <h1><%= t("build_head") %></h1>
+    <p class="hero-lead"><%= t("landing_lead") %></p>
+    <div class="hero-actions"><a class="button button-primary button-large" href="/auth/discord"><%= t("continue_discord") %> <span>→</span></a><a class="button button-ghost button-large" href="#features"><%= t("explore_features") %></a></div>
+    <div class="hero-trust"><span>● OAuth2 sign-in</span><span>● Encrypted bot tokens</span><span>● Live Gateway status</span></div>
+  </div>
+  <div class="hero-visual" aria-label="Platform preview">
+    <div class="glow-orb"></div>
+    <div class="preview-window">
+      <div class="preview-top"><div class="window-dots"><i></i><i></i><i></i></div><span>PRODUCT PREVIEW / ILLUSTRATION</span><span class="preview-live"><i></i> SYSTEM</span></div>
+      <div class="preview-body"><div class="preview-side"><b>R</b><i></i><i></i><i></i><i></i></div><div class="preview-main"><div class="preview-heading"><small>BOT OVERVIEW</small><b>One workspace. Full control.</b></div><div class="preview-stats"><div><small>BOT STATUS</small><b class="status-online">● Gateway state</b></div><div><small>COMMANDS</small><b>—</b></div><div><small>RUNTIME</small><b>Live state</b></div></div><div class="preview-bot"><div class="preview-bot-icon">◈</div><div><b>Community Assistant</b><small>Discord application</small></div><span class="mini-pill">READY</span></div><div class="preview-lines"><i></i><i></i><i></i></div></div></div>
+    </div>
+    <div class="floating-chip chip-one">◈ <span>Feature control</span></div><div class="floating-chip chip-two">✓ <span>Encrypted credentials</span></div>
+  </div>
+</main>
+<section id="features" class="feature-section"><div class="section-heading"><div class="eyebrow">TOOLS FOR BUILDERS</div><h2>One control center for your bots.</h2></div><div class="feature-grid">
+  <article class="feature-card"><span class="feature-icon">⌘</span><h3>Bot lifecycle</h3><p>Create bots, start or stop their runtime, and view connection state from one place.</p></article>
+  <article class="feature-card"><span class="feature-icon">▤</span><h3>Configurable modules</h3><p>Enable moderation, welcome, tickets, giveaways, leveling, utility and more.</p></article>
+  <article class="feature-card"><span class="feature-icon">⌁</span><h3>Operational visibility</h3><p>Review runtime events, server membership, command registration and error logs.</p></article>
+</div></section>
+<footer class="public-footer"><span>© <%= new Date().getFullYear() %> ROVEX MAKER. All rights reserved.</span><span>Built with Node.js · Express · EJS · discord.js</span></footer>
+</body></html>
